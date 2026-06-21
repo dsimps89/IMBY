@@ -1,0 +1,19 @@
+{
+  "name": "YARDNEST Beta Program",
+  "pages": 105,
+  "features": [
+    "multi-page static site",
+    "portal",
+    "demo paywall",
+    "local-save forms",
+    "legal template pack",
+    "pilot calculator"
+  ],
+  "next_steps": [
+    "connect backend",
+    "connect Stripe",
+    "legal review",
+    "municipal review",
+    "insurance review"
+  ]
+}
