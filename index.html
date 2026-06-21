@@ -390,6 +390,38 @@
       flex-wrap: wrap;
     }
 
+
+    .dashboard {
+      display: none;
+      padding: 82px clamp(18px, 4vw, 56px);
+      border-top: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(140,255,155,.10), transparent 22rem),
+        rgba(255,255,255,.02);
+    }
+
+    .dashboard.show { display: block; }
+
+    .status-pill {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(140,255,155,.14);
+      color: var(--mint);
+      border: 1px solid rgba(140,255,155,.28);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .checklist label {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 0;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+
     @media (max-width: 900px) {
       .hero, .calculator { grid-template-columns: 1fr; }
       .grid, .flow { grid-template-columns: 1fr; }
@@ -595,6 +627,54 @@
     </div>
   </section>
 
+
+  <section id="dashboard" class="dashboard">
+    <div class="badge">Host Portal · Demo Access</div>
+    <h2>Deployment Room</h2>
+    <p>This is the page users enter after the paywall/demo unlock. It acts like a lightweight dashboard for hosts, municipal users, or investors.</p>
+
+    <div class="grid">
+      <div class="card">
+        <span class="status-pill">Host setup</span>
+        <h3 style="margin-top:14px">Yard Listing Builder</h3>
+        <p>Create a listing once. The system handles screening, routing, reports, and payout logic.</p>
+        <button class="btn" onclick="alert('Demo: listing builder would open here.')">Create Listing</button>
+      </div>
+
+      <div class="card">
+        <span class="status-pill">Automation</span>
+        <h3 style="margin-top:14px">Low-Interaction Mode</h3>
+        <p>Preset rules reduce messaging. Hosts can approve categories instead of manually answering every request.</p>
+        <button class="btn" onclick="alert('Demo: automation settings would open here.')">Set Rules</button>
+      </div>
+
+      <div class="card">
+        <span class="status-pill">Municipal</span>
+        <h3 style="margin-top:14px">Pilot Report</h3>
+        <p>Track occupancy, projected savings, host payouts, incidents, and available micro-shelter capacity.</p>
+        <button class="btn" onclick="alert('Demo: municipal report would open here.')">View Report</button>
+      </div>
+    </div>
+
+    <div class="calculator">
+      <div class="card checklist">
+        <h3>Compliance checklist</h3>
+        <label><input type="checkbox"> Yard boundary confirmed</label>
+        <label><input type="checkbox"> Access path photographed</label>
+        <label><input type="checkbox"> Quiet hours selected</label>
+        <label><input type="checkbox"> Emergency contact added</label>
+        <label><input type="checkbox"> Municipal review flag prepared</label>
+      </div>
+
+      <div class="card">
+        <h3>Next recommended action</h3>
+        <div class="result">Create 10 pilot listings</div>
+        <p>Start with a controlled group, gather proof, then expand by neighbourhood or municipality.</p>
+        <button class="btn" onclick="document.querySelector('#calculator').scrollIntoView()">Return to Calculator</button>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <span>© 2026 YARDNEST Demo. Built for GitHub Pages.</span>
     <span>Not legal, housing, tax, or investment advice. Pilot only after local review.</span>
@@ -682,7 +762,12 @@
     }
 
     function fakeUnlock() {
-      document.getElementById('unlockStatus').textContent = 'Demo unlocked. In production, this button should redirect to checkout.';
+      document.getElementById('unlockStatus').textContent = 'Demo unlocked. Opening deployment room...';
+      setTimeout(() => {
+        closePaywall();
+        document.getElementById('dashboard').classList.add('show');
+        document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+      }, 450);
     }
 
     updateCalc();
